@@ -7,6 +7,20 @@ import { HeaderComponent } from './header/header.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TaskComponent } from './task/task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from '../environments/environment.development';
+import { HttpClientModule } from '@angular/common/http';
+
+const firebaseConfig = {
+  apiKey: environment.apiKey,
+  authDomain: environment.authDomain,
+  projectId: environment.projectId,
+  storageBucket: environment.storageBucket,
+  messagingSenderId: environment.messagingSenderId,
+  appId: environment.appId,
+  measurementId: environment.measurementId
+};
 
 @NgModule({
   declarations: [
@@ -19,11 +33,16 @@ import { AddTaskComponent } from './add-task/add-task.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
+
+
 export class AppModule { }
